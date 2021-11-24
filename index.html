@@ -79,7 +79,7 @@ a:hover {
 }
 a:active {
     color: blue;
-}
+}</script><script>
  body {
   margin: 0;
   padding: 0;
@@ -161,6 +161,16 @@ a:active {
 <div class="center" align="center">
   <h1>Тіркелу бөлімі</h1>
   <form action="vendor/create.php" method="post">
+    <?php
+  require_once '../config/connect.php';
+  $title=$_POST['title'];
+  $description=$_POST['description'];
+  $price=$_POST['price'];
+  $opp=$_POST['opp'];
+  mysqli_query($connect, "INSERT INTO `azharka` (`ID`, `login`, `password`, `Name`, `Surname`) VALUES (NULL, ' $title', '$description', '$price', '$opp')");
+
+  header('Location: ../index.php');
+?>
     <div class="inputbox">
       <input type="text" name="description">
       <span>Логиніңізді жазыңыз...</span>
@@ -183,21 +193,7 @@ a:active {
   </form>
 </div>
 <form action="vendor/create.php" method="post">
-  <div class="center" align="center">
-     <h1>Авторизация</h1>
-     <form action="vendor/create.php" method="post">
-    <div class="inputbox">
-      <input type="text" name="description">
-      <span>Логиніңізді жазыңыз...</span>
-    </div>
-    <div class="inputbox">
-      <input type="text" name="title">
-      <span>Құпиясөзді жазыңыз...</span>
-    </div>
-  </form>
-  <br><br><br><br><br>  
-<br><br><br><br><br><br><br><br><br><br>
-<?php
+  <?php
 
       $connect=mysqli_connect('localhost','mysql', 'mysql','azharbaza');
       if(isset($_COOKIE['login']) and isset($_COOKIE['password'])){
@@ -211,7 +207,19 @@ a:active {
         }
       }
     ?>
+  <div class="center" align="center">
+     <h1>Авторизация</h1>
+     <form action="vendor/create.php" method="post">
     <div class="inputbox">
+      <input type="text" name="description">
+      <span>Логиніңізді жазыңыз...</span>
+    </div>
+    <div class="inputbox">
+      <input type="text" name="title">
+      <span>Құпиясөзді жазыңыз...</span>
+    </div>
+  </form>
+ <div class="inputbox">
       <button type="submit"><a href="http://localhost/?elementor_library=azhar">Кіру</a></button>
     </div>
     <div class="inputbox">
@@ -224,16 +232,6 @@ a:active {
   if(!$connect){
   	die('oshibka');
   }
-?>
-<?php
-  require_once '../config/connect.php';
-  $title=$_POST['title'];
-  $description=$_POST['description'];
-  $price=$_POST['price'];
-  $opp=$_POST['opp'];
-  mysqli_query($connect, "INSERT INTO `azharka` (`ID`, `login`, `password`, `Name`, `Surname`) VALUES (NULL, ' $title', '$description', '$price', '$opp')");
-
-  header('Location: ../index.php');
 ?>
 <br><br><br><br><br>
 <main class="main">
