@@ -2,3 +2,4 @@
 туво
 mdnm
 <meta http-equiv="Refresh" content="2; url=public/index.html">
+http://crc.html
