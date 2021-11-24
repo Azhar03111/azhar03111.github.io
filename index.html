@@ -80,19 +80,7 @@ a:hover {
 a:active {
     color: blue;
 }
-  </style>
-</head>
-<body>
-  <?php
-  require_once 'config/connect.php';
-  $goods=mysqli_query($connect,"SELECT * FROM `azharka`");
-  $goods=mysqli_fetch_all($goods);
-?>
-
-<html>
-
-<head><link rel="stylesheet" href="ca.css">
-  <title>1 keste</title>body {
+ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -160,10 +148,15 @@ a:active {
 }
 .center .inputbox:hover [type="button"] {
   background: linear-gradient(45deg, greenyellow, dodgerblue);
-}
+}   
+  </style>
 </head>
-<body BACKGROUND="42.jpg">
-
+<body>
+  <?php
+  require_once 'config/connect.php';
+  $goods=mysqli_query($connect,"SELECT * FROM `azharka`");
+  $goods=mysqli_fetch_all($goods);
+?>
 
 <div class="center" align="center">
   <h1>Тіркелу бөлімі</h1>
@@ -226,23 +219,6 @@ a:active {
     </div>
   </form>
 </div>
-
-<TABLE border="1" width="60%" height="400" bgcolor="#FF99CC">
-<TR bgcolor="violet">
- <TD><H2>Сіздің ID</H2></TD> <TD><H2>Логин</H2></TD><TD><H2>Құпиясөз</H2></TD><TD><H2>Есімі</H2></TD><TD><H2>Аты-жөні</H2></TD><TD><H2>Жою</H2></TD>
-</TR>
-<?php
-  foreach ($goods as $key => $item) {
-    echo '
-      <tr>
-        <TD>'.$item[0].'</TD> <TD>'.$item[1].'</TD><TD>'.$item[2].'</TD><TD>'.$item[3].'</TD><TD>'.$item[4].'</TD><TD><a href="../vendor/delete.php?id=<?= item[0] ?>">Жою</a></TD>
-      </tr>
-    ';
-  }
-?>
-</TABLE>
-
-</body></html>
 <?php
   $connect=mysqli_connect('localhost','mysql', 'mysql','azharbaza');
   if(!$connect){
