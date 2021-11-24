@@ -83,6 +83,182 @@ a:active {
   </style>
 </head>
 <body>
+  <?php
+  require_once 'config/connect.php';
+  $goods=mysqli_query($connect,"SELECT * FROM `azharka`");
+  $goods=mysqli_fetch_all($goods);
+?>
+
+<html>
+
+<head><link rel="stylesheet" href="ca.css">
+  <title>1 keste</title>body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Sansita Swashed", cursive;
+}
+.center {
+  position: relative;
+  padding: 50px 50px;
+  background: #fff;
+  border-radius: 10px;
+}
+.center h1 {
+  font-size: 2em;
+  border-left: 5px solid dodgerblue;
+  padding: 10px;
+  color: #000;
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.center .inputbox {
+  position: relative;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 50px;
+}
+.center .inputbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #000;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.center .inputbox:last-child {
+  margin-bottom: 0;
+}
+.center .inputbox span {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: sans-serif;
+}
+.center .inputbox input:focus ~ span,
+.center .inputbox input:valid ~ span {
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+.center .inputbox [type="button"] {
+  width: 50%;
+  background: dodgerblue;
+  color: #fff;
+  border: #fff;
+}
+.center .inputbox:hover [type="button"] {
+  background: linear-gradient(45deg, greenyellow, dodgerblue);
+}
+</head>
+<body BACKGROUND="42.jpg">
+
+
+<div class="center" align="center">
+  <h1>Тіркелу бөлімі</h1>
+  <form action="vendor/create.php" method="post">
+    <div class="inputbox">
+      <input type="text" name="description">
+      <span>Логиніңізді жазыңыз...</span>
+    </div>
+    <div class="inputbox">
+      <input type="text" name="title">
+      <span>Құпиясөзді жазыңыз...</span>
+    </div>
+    <div class="inputbox">
+      <input type="text" name="description">
+      <span>Есімі</span>
+    </div>
+    <div class="inputbox">
+      <input type="text" name="title">
+      <span>Аты-жөні</span>
+    </div>
+    <div class="inputbox">
+      <button type="submit">Қосу</button>
+    </div>
+  </form>
+</div>
+<form action="vendor/create.php" method="post">
+  <div class="center" align="center">
+     <h1>Авторизация</h1>
+     <form action="vendor/create.php" method="post">
+    <div class="inputbox">
+      <input type="text" name="description">
+      <span>Логиніңізді жазыңыз...</span>
+    </div>
+    <div class="inputbox">
+      <input type="text" name="title">
+      <span>Құпиясөзді жазыңыз...</span>
+    </div>
+  </form>
+    
+
+<?php
+
+      $connect=mysqli_connect('localhost','mysql', 'mysql','azharbaza');
+      if(isset($_COOKIE['login']) and isset($_COOKIE['password'])){
+        $query=mysqli_query($link, "SELECT*,FROM `azharka` ORDER BY `azharka`.`ID` ".intval($_COOKIE['id'])."'LIMIT 1'");
+        $userdata=mysqli_fetch_assoc($query);
+
+        if(($userdata['azharbaza'] !== $COOKIE['id']) or ($userdata['azharka'] !== $COOKIE['id'])){
+          setcookie("id","",time()-3600*24*30*12./""); 
+          print "False";
+
+        }
+      }
+    ?>
+    <div class="inputbox">
+      <button type="submit"><a href="http://localhost/?elementor_library=azhar">Кіру</a></button>
+    </div>
+    <div class="inputbox">
+      <button type="submit"><a href="crc.html">Кіру</a></button>
+    </div>
+  </form>
+</div>
+
+<TABLE border="1" width="60%" height="400" bgcolor="#FF99CC">
+<TR bgcolor="violet">
+ <TD><H2>Сіздің ID</H2></TD> <TD><H2>Логин</H2></TD><TD><H2>Құпиясөз</H2></TD><TD><H2>Есімі</H2></TD><TD><H2>Аты-жөні</H2></TD><TD><H2>Жою</H2></TD>
+</TR>
+<?php
+  foreach ($goods as $key => $item) {
+    echo '
+      <tr>
+        <TD>'.$item[0].'</TD> <TD>'.$item[1].'</TD><TD>'.$item[2].'</TD><TD>'.$item[3].'</TD><TD>'.$item[4].'</TD><TD><a href="../vendor/delete.php?id=<?= item[0] ?>">Жою</a></TD>
+      </tr>
+    ';
+  }
+?>
+</TABLE>
+
+</body></html>
+<?php
+  $connect=mysqli_connect('localhost','mysql', 'mysql','azharbaza');
+  if(!$connect){
+  	die('oshibka');
+  }
+?>
+<?php
+  require_once '../config/connect.php';
+  $title=$_POST['title'];
+  $description=$_POST['description'];
+  $price=$_POST['price'];
+  $opp=$_POST['opp'];
+  mysqli_query($connect, "INSERT INTO `azharka` (`ID`, `login`, `password`, `Name`, `Surname`) VALUES (NULL, ' $title', '$description', '$price', '$opp')");
+
+  header('Location: ../index.php');
+?>
 <br><br><br><br><br>
 <main class="main">
   <div class="box">
